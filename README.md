@@ -6,8 +6,11 @@ Setup Procedure: (Draft)
 Notification module setup procedures
 
 Hardware setup:
+
 Requirements:
+
 1x LCD Display with supported port expanders : PCF8574, the MCP23008 and the MCP23017 <-- for I2C connection
+
 1x LED (with resistor)
 
 
@@ -22,7 +25,8 @@ Wiring :
 • SDA: Pin 3 (SDA)
 • SCL: Pin 5 (SCL)
 
-Check I2C 
+Check I2C address :
+$ sudo i2cdetect -y 1 
 
 
 Software Setup:
@@ -31,8 +35,9 @@ Software Setup:
 
 2) Install LCD library -- RPLCD
 
- i) Install RPLCD directly from PyPI using pip:
-      $ sudo pip3 install RPLCD (for python2 use pip)
+ i) Install RPLCD directly from using pip:
+ 
+ 		$ sudo pip3 install RPLCD (for python2 use pip)
 
  ii) If you want to use I2C, you also need smbus:
       $ sudo apt-get install python3-smbus (for python2 use python-smbus)
