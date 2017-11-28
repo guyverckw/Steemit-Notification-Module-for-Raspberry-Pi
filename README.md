@@ -34,30 +34,30 @@ Hardware setup:
   
   
   
-		• Connect to GRD and GPIO 0 
+		â€¢ Connect to GRD and GPIO 0 
 
 
 	ii) LCD Display:
   
 		Connect the pins on the right with the Raspberry Pi:
 
-		• GND: Pin 6 (GND)
+		â€¢ GND: Pin 6 (GND)
 
-		• VCC: Pin 4 (5V)
+		â€¢ VCC: Pin 4 (5V)
 
-		• SDA: Pin 3 (SDA)
+		â€¢ SDA: Pin 3 (SDA)
 
-		• SCL: Pin 5 (SCL)
+		â€¢ SCL: Pin 5 (SCL)
 
 
 
 3) Enable I2C interface:
 	$ sudo raspi-config
-	• Select "Interface Options"
-	• Select "I2C"	
-	• Select "Yes"
-	• Select "OK"	
-	• Select "Finish" to quit raspi-config
+	â€¢ Select "Interface Options"
+	â€¢ Select "I2C"	
+	â€¢ Select "Yes"
+	â€¢ Select "OK"	
+	â€¢ Select "Finish" to quit raspi-config
 
 4) Check I2C address :
 
@@ -103,7 +103,7 @@ Setup:
 
 
 		
-if get "fatal error: openssl/aes.h : No such file or directory" error, you may need to install Openssl Development package
+if you get "fatal error: openssl/aes.h : No such file or directory" error, you may need to install Openssl Development package
   
 	$ sudo apt-get install libssl-dev
 
