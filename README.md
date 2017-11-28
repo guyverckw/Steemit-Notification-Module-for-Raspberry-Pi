@@ -5,7 +5,7 @@ Notification of your Steemit account activity on Raspberry Pi platform
 
 
 
-Setup Procedure: (Draft)
+Setup Procedure:
 
 
 
@@ -72,10 +72,7 @@ Software
 Setup:
 
 
-1. Install Raspbian
-
-
-2) Install LCD library -- RPLCD
+1) Install LCD library -- RPLCD
 
  
 	i) Install RPLCD directly from using pip:
@@ -89,7 +86,7 @@ Setup:
 		$ sudo apt-get install python3-smbus (for python2 use python-smbus)
 
 
-3) Install Python-steem (piston-steem)
+2) Install Python-steem (piston-steem)
   
 	$ sudo apt-get update
   
@@ -109,12 +106,12 @@ if you get "fatal error: openssl/aes.h : No such file or directory" error, you m
 
 
 
-4) Download Steem_notify.py
+3) Download Steem_notify.py
 
 
-5) Change 'account_name' in line 10 of Steem_notify.py to your own Steemit account name
+4) Change 'account_name' in line 10 of Steem_notify.py to your own Steemit account name
 
-6) Update line 15 of Steem_notify.py to reflect your system's own i2c address
+5) Update line 15 of Steem_notify.py to reflect your system's own i2c address
 6) Run it!
   
 	$ python3 Steem_notify.py
