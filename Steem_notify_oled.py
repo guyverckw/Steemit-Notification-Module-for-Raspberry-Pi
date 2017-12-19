@@ -4,7 +4,8 @@ from piston.blog import Blog
 from piston.post import Post
 
 from demo_opts import get_device
-from luma.core.virtual import terminal
+from luma.core import cmdline
+from luma.core.virtual import terminal, viewport
 from PIL import ImageFont
 
 import os
@@ -16,40 +17,44 @@ import time
 import RPi.GPIO as GPIO
 import sys
 
-# initialize Steem
-steem = Steem()
-
-# Prepare LED indicator
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(11, GPIO.OUT, initial=GPIO.LOW)
-
 def make_font(name, size):
 	font_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', name))
 	return ImageFont.truetype(font_path, size)
 
 
 def main():
-# Set user account, no. of history retrieve everytime, transaction ID buffer array of 10 
+	# Set user account, no. of history retrieve everytime, transaction ID buffer array of 10 
 	account_name = 'guyverckw'
 	account = Account(account_name)
+	steem = Steem()
 	first = 9999999999
 	limit = 5
 	History = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 	History_ID = 1.0
 	message = ' '
 
+	# Prepare LED indicator
+	GPIO.setmode(GPIO.BOARD)
+	GPIO.setup(11, GPIO.OUT, initial=GPIO.LOW)
 
-# Prepare for OLED display
+
+	# Prepare for OLED display, first prepare the device with built-in parameter for 12832 screen
+	device_args = ['-d', 'ssd1306', '--width', '128', '--height', '32']
+	parser = cmdline.create_parser(description='luma.examples arguments')
+	args = parser.parse_args(device_args)
+	device = cmdline.create_device(args)
+
+	# Set font 
 	font = make_font('ProggyTiny.ttf', 16)
 	term = terminal(device, font)
 	term.clear()
 	term.animate = False
 
-# keep checking transactions
+	# keep checking transactions
 	while True:
 		index = 0
 
-# Get last 5 history, put ID into buffer array
+		# Get last 5 history, put ID into buffer array
 		for his in account.rawhistory(first, limit):
 			if History_ID == his[0]:
 				break
@@ -64,7 +69,7 @@ def main():
 				continue
 			History[index] = his[0]
 			index += 1
-			print (message)
+			# print (message)
 			GPIO.output(11, GPIO.HIGH)
 			term.clear()
 			term.println(message)
@@ -75,7 +80,8 @@ def main():
 
 if __name__ == '__main__':
 	try:
-		device = get_device()
 		main()
 	except KeyboardInterrupt:
 		pass
+	except Exception as e:
+		print(e)
